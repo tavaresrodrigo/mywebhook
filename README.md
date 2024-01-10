@@ -18,14 +18,14 @@ This project contains a Python Flask-based webhook service designed to demonstra
 Clone this repository to your local machine. Navigate to the cloned directory and build the Docker container:
 
 ```bash
-$ podman build -t webhook-service .
+$ podman build -t mywebhook .
 ```
 
 Push the built image to a container registry:
 
 ```bash
-$ podman tag webhook-service [YOUR_REGISTRY]/webhook-service
-$ podman push [YOUR_REGISTRY]/webhook-service
+$ podman tag mywebhook [YOUR_REGISTRY]/mywebhook
+$ podman push [YOUR_REGISTRY]/mywebhook
 ```
 
 ### Deploying on OpenShift
@@ -33,8 +33,8 @@ Log in to your OpenShift cluster using the oc CLI. Deploy the webhook service us
 
 ```bash
 $ oc new-project auditlogs
-$ oc new-app [YOUR_REGISTRY]/webhook-service
-$ oc expose svc/webhook-service
+$ oc new-app [YOUR_REGISTRY]/mywebhook
+$ oc expose svc/mywebhook
 ```
 
 Note the exposed service URL, which will be used as the webhook endpoint in ACS.
