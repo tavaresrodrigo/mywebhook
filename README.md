@@ -2,18 +2,18 @@
 
 ## Introduction
 
-This project contains a Python Flask-based webhook service designed to demonstrate the audit logging integration of Red Hat Advanced Cluster Security for Kubernetes (ACS). ACS provides audit logging to monitor changes made within the system, capturing important PUT and POST events through generic webhook. This webhook service is configured to receive and display these audit log messages, facilitating the monitoring and troubleshooting of ACS.
+This project contains a Python Flask-based webhook service designed to demonstrate the audit logging integration of Red Hat Advanced Cluster Security for Kubernetes (RHACS). ACS provides audit logging to monitor changes made within the system, capturing important PUT and POST events through generic webhook. 
+
 
 ## Prerequisites
 
-    * Python 3.8 or higher.
-    * Docker or Podman for containerization.
-    * Access to an OpenShift cluster for deployment. (I recommend [CRC](https://github.com/crc-org/crc) if you want to test it in your local)
-    * Basic understanding of Red Hat Advanced Cluster Security for Kubernetes, including permissions to configure audit logging integration.
+* Python 3.8 or higher.
+* Docker or Podman for containerization.
+* Access to an OpenShift cluster for deployment. (I recommend [CRC](https://github.com/crc-org/crc) if you want to test it in your local)
+* Basic understanding of Red Hat Advanced Cluster Security for Kubernetes, including permissions to configure audit logging integration.
 
-## Installation
 
-### Building the Container
+## Building the Container image
 
 Clone this repository to your local machine. Navigate to the cloned directory and build the Docker container:
 
@@ -28,7 +28,7 @@ $ podman tag mywebhook [YOUR_REGISTRY]/mywebhook
 $ podman push [YOUR_REGISTRY]/mywebhook
 ```
 
-### Deploying on OpenShift
+## Deploying on OpenShift
 Log in to your OpenShift cluster using the oc CLI. Deploy the webhook service using the image from your registry:
 
 ```bash
@@ -37,18 +37,36 @@ $ oc new-app [YOUR_REGISTRY]/mywebhook
 $ oc expose svc/mywebhook
 ```
 
-Note the exposed service URL, which will be used as the webhook endpoint in ACS.
+Note the exposed service URL, which will be used as the webhook endpoint in ACS, you will need to add the "/webhook" at the end of your url as per the webhook code below.
 
-### Usage
+```python
+from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route('/webhook', methods=['POST', 'PUT'])
+def webhook():
+    if request.method == 'POST':
+        print("Received a POST request:")
+    elif request.method == 'PUT':
+        print("Received a PUT request:")
+    print(request.json)
+    return "Webhook received!", 200
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=8080)
+```
+
+## Usage
 Enabling Audit Logging in ACS:
 
 * Log in to the RHACS portal.
 * Navigate to Platform Configuration → Integrations.
 * In the Notifier Integrations section, select Generic Webhook or Splunk.
 * Fill in the required information, including the URL of the deployed webhook service.
-* Enable Audit Logging.
+![Generic WebHook Configuration in ACS](/images/genericwebhook.png)
 
-### Viewing Audit Logs
+## Viewing Audit Logs
 
 Once enabled, ACS will send HTTP POST messages to the configured webhook URL whenever a modification occurs. The webhook service will display these messages, allowing you to monitor ACS activities and audit logs. You can save the Json objects in a PersistentVolume if you want. 
 
