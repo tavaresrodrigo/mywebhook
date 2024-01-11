@@ -1,4 +1,5 @@
 from flask import Flask, request
+import json
 
 app = Flask(__name__)
 
@@ -8,7 +9,8 @@ def webhook():
         print("Received a POST request:")
     elif request.method == 'PUT':
         print("Received a PUT request:")
-    print(request.json)
+    pretty_json = json.dumps(request.json, indent=4)
+    print(pretty_json)
     return "Webhook received!", 200
 
 if __name__ == '__main__':
