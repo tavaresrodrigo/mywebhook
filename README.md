@@ -2,20 +2,20 @@
 
 ## Introduction
 
-This project contains a Python Flask-based webhook service designed to demonstrate the audit logging integration of Red Hat Advanced Cluster Security for Kubernetes (RHACS). ACS provides audit logging to monitor changes made within the system, capturing important PUT and POST events through generic webhook. 
+This is a Python Flask-based webhook container designed to demonstrate the audit logging integration of Red Hat Advanced Cluster Security for Kubernetes (RHACS). ACS provides audit logging to monitor changes made within the system, capturing PUT and POST events. 
 
 
 ## Prerequisites
 
 * Python 3.8 or higher.
-* Docker or Podman for containerization.
+* Podman or the contianer engine of your choice.
 * Access to an OpenShift cluster for deployment. (I recommend [CRC](https://github.com/crc-org/crc) if you want to test it in your local)
 * Basic understanding of Red Hat Advanced Cluster Security for Kubernetes, including permissions to configure audit logging integration.
 
 
 ## Building the Container image
 
-Clone this repository to your local machine. Navigate to the cloned directory and build the Docker container:
+Clone this repository to your local machine. Navigate to the cloned directory and build the Container:
 
 ```bash
 $ podman build -t mywebhook .
