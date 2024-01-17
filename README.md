@@ -1,4 +1,4 @@
-# Webhook Service for RHACS Audit Logging
+# Webhookfor RHACS Audit Logging
 
 ## Introduction
 
@@ -38,13 +38,19 @@ $ oc new-app [YOUR_REGISTRY]/mywebhook
 $ oc expose svc/mywebhook
 ```
 
-## Usage
-Enabling Audit Logging in ACS:
 
-* Log in to the RHACS portal.
-* Navigate to Platform Configuration → Integrations.
-* In the Notifier Integrations section, select Generic Webhook.
-* Fill in the required information with the svc/mywebhook url.
+## Enabling Audit Logging in ACS:
+
+* Log in to the RHACS Central portal.
+* Navigate to Platform Configuration -> Integrations -> Generic Webhook.
+* Check ✅ "Enable audit logging".
+
+Get the route url and Fill in the Create Integration form:
+
+```bash
+$ oc get route mywebhook
+```
+*  with the route/mywebhook url.
 ![Generic WebHook Configuration in ACS](/images/genericwebhook.png)
 
 ## Viewing Audit Logs
