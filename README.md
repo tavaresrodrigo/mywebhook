@@ -44,7 +44,7 @@ Enabling Audit Logging in ACS:
 * Log in to the RHACS portal.
 * Navigate to Platform Configuration → Integrations.
 * In the Notifier Integrations section, select Generic Webhook.
-* Fill in the required information, add "/webhook" at the end of the Webhook url).
+* Fill in the required information with the svc/mywebhook url.
 ![Generic WebHook Configuration in ACS](/images/genericwebhook.png)
 
 ## Viewing Audit Logs
