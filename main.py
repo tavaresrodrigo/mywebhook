@@ -3,12 +3,8 @@ import json
 
 app = Flask(__name__)
 
-@app.route('/webhook', methods=['POST', 'PUT'])
+@app.route('/', methods=['POST', 'PUT'])
 def webhook():
-    if request.method == 'POST':
-        print("Received a POST request:")
-    elif request.method == 'PUT':
-        print("Received a PUT request:")
     pretty_json = json.dumps(request.json, indent=4)
     print(pretty_json)
     return "Webhook received!", 200

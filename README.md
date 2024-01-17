@@ -49,9 +49,10 @@ Enabling Audit Logging in ACS:
 
 ## Viewing Audit Logs
 
-The Webhook will display the log messages in the container STDOUT. In the example below I have cloned the Policy "30-Day Scan Age":
+The Webhook will display the log messages in the container STDOUT. In the example below I have cloned the Policy "30-Day Scan Age", use the **$oc logs** command to check the container output:
 
 ```json
+$oc logs mywebhook-pod
  "request": {
             "endpoint": "/v1/policies/dryrunjob",
             "method": "POST",
@@ -93,9 +94,6 @@ The Webhook will display the log messages in the container STDOUT. In the exampl
         },
         "method": "UI",
         "interaction": "CREATE"
-    }
-}
-
 ```
 
 
