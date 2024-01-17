@@ -1,4 +1,4 @@
-# Webhookfor RHACS Audit Logging
+# Webhook for RHACS Audit Logging
 
 ## Introduction
 
