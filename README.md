@@ -6,6 +6,7 @@ Red Hat Advanced Cluster Security for Kubernetes (RHACS) provides audit logging 
 
 When you enable audit logging, every time there is a modification, RHACS sends an HTTP POST message (JSON f) to a Webhook you provide. This is a Python Webhook container that you can use to check the log events in the container STDOUT.
 
+![diagram](/images/diagram.png)
 ## Prerequisites
 
 * Python 3.11.
