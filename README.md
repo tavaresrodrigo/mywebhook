@@ -8,7 +8,7 @@ When you enable audit logging, every time there is a modification, RHACS sends a
 
 ## Prerequisites
 
-* Python 3.8 or higher.
+* Python 3.11.
 * Podman or the container engine of your choice.
 * Access to an OpenShift cluster for deployment. (I recommend [CRC](https://github.com/crc-org/crc) if you want to test it in your local)
 * Basic understanding of Red Hat Advanced Cluster Security for Kubernetes.
@@ -33,9 +33,7 @@ $ podman push [YOUR_REGISTRY]/mywebhook
 Log in to your OpenShift cluster using the oc CLI. Deploy the webhook service using the image from your registry:
 
 ```bash
-$ oc new-project auditlogs
-$ oc new-app [YOUR_REGISTRY]/mywebhook
-$ oc expose svc/mywebhook
+$ oc create -f mywebook.yaml
 ```
 
 
@@ -109,6 +107,9 @@ $ oc logs -f mywebhook-pod
         "interaction": "CREATE"
 ```
 
+## Future Work: Centralized Log Management with Loki and Grafana
+
+I am working to implement a centralized solution for viewing and analyzing Red Hat Advanced Cluster Security (RHACS) audit logs using Loki and Grafana in the OpenShift Logging stack. Contributions are welcome. 
 
 ## Contributing 
 
